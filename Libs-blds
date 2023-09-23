@@ -3,7 +3,7 @@
 apt-get update
 apt-get -y install software-properties-common
 add-apt-repository universe
-apt-get update && apt-get -y install locales csh cmake python m4 libcurl4-openssl-dev libz-dev gcc g++ gfortran liblapack-dev make git wget subversion libxml2-utils libxml-libxml-perl libswitch-perl
+apt-get update && apt-get -y install locales csh cmake m4 libcurl4-openssl-dev libz-dev gcc g++ gfortran liblapack-dev make git wget subversion libxml2-utils libxml-libxml-perl libswitch-perl
 
 mkdir -p /usr/local/packages
 mkdir -p /usr/local/sources
