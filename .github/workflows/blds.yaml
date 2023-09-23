@@ -1,0 +1,43 @@
+name: blds
+
+on:
+  release:
+    types: [ published ]
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+
+jobs:
+  ocis:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: GHCR
+        uses: dicker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build
+        uses: docker/build-push-action@v3
+        with:
+          file: Dockerfile
+          builder: $${{ steps.buildx.outputs.name }}
+          push: ${{ github.ref == 'refs/heads/main' }}
+          tags: ghcr.io/mahf708/e3sm-imgs:${{ github.ref_name }}
+
