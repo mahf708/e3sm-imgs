@@ -40,4 +40,3 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.ref == 'refs/heads/main' }}
           tags: ghcr.io/mahf708/e3sm-imgs:${{ github.ref_name }}
-
