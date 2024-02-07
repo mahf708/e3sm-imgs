@@ -1,14 +1,15 @@
 #!/bin/bash -fe
 
-export CMAKE_VERSION="3.27.7"
-export MPICH_VERSION="3.3.2"
-export SZIP_VERSION="2.1.1"
-export HDF5_VERSION="1.10.6"
-export NETCDFC_VERSION="4.7.3"
-export NETCDFCXX_VERSION="4.3.1"
-export NETCDFFORTRAN_VERSION="4.4.4"
-export PNETCDF_VERSION="1.12.1"
-
+echo "-configs---------------------------------------"
+echo "CMAKE_VERSION: ${CMAKE_VERSION}"
+echo "MPICH_VERSION: $MPICH_VERSION"
+echo "SZIP_VERSION: $SZIP_VERSION"
+echo "HDF5_VERSION: $HDF5_VERSION"
+echo "NETCDFC_VERSION: $NETCDFC_VERSION" 
+echo "NETCDFCXX_VERSION: $NETCDFCXX_VERSION"
+echo "NETCDFFORTRAN_VERSION: $NETCDFFORTRAN_VERSION"
+echo "PNETCDF_VERSION: $PNETCDF_VERSION"
+echo "-----------------------------------------------"
 
 apt-get update
 apt-get -y install software-properties-common

@@ -19,6 +19,29 @@ jobs:
       id-token: write
 
     steps:
+      # - name: Make space
+      #   run: |
+      #     echo "Listing 100 largest packages"
+      #     dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n | tail -n 100
+      #     df -h
+      #     echo "Removing large packages"
+      #     sudo apt-get remove -y '^dotnet-.*'
+      #     sudo apt-get remove -y '^llvm-.*'
+      #     sudo apt-get remove -y 'php.*'
+      #     sudo apt-get remove -y '^mongodb-.*'
+      #     sudo apt-get remove -y '^mysql-.*'
+      #     sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri
+      #     sudo apt-get autoremove -y
+      #     sudo apt-get clean
+      #     df -h
+      #     echo "Removing large directories"
+      #     # deleting 15GB
+      #     rm -rf /usr/share/dotnet/
+      #     sudo rm -rf /usr/share/dotnet
+      #     sudo rm -rf /opt/ghc
+      #     sudo rm -rf "/usr/local/share/boost"
+      #     sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+      #     df -h
       - 
         name: Checkout
         uses: actions/checkout@v4
@@ -37,6 +60,23 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           file: Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ghcr.io/mahf708/e3sm-imgs:${{ github.ref_name }}
+          tags: ghcr.io/mahf708/e3sm-imgs:${{ github.sha }}
+          build-args: |
+            CMAKE_VERSION=${{ env.CMAKE_VERSION }}
+            MPICH_VERSION=${{ env.MPICH_VERSION }}
+            SZIP_VERSION=${{ env.SZIP_VERSION }}
+            HDF5_VERSION=${{ env.HDF5_VERSION }}
+            NETCDFC_VERSION=${{ env.NETCDFC_VERSION }}
+            NETCDFCXX_VERSION=${{ env.NETCDFCXX_VERSION }}
+            NETCDFFORTRAN_VERSION=${{ env.NETCDFFORTRAN_VERSION }}
+            PNETCDF_VERSION=${{ env.PNETCDF_VERSION }}
+        env:
+          CMAKE_VERSION: "3.27.7"
+          MPICH_VERSION: "3.3.2"
+          SZIP_VERSION: "2.1.1"
+          HDF5_VERSION: "1.10.6"
+          NETCDFC_VERSION: "4.7.3"
+          NETCDFCXX_VERSION: "4.3.1"
+          NETCDFFORTRAN_VERSION: "4.4.4"
+          PNETCDF_VERSION: "1.12.1"
