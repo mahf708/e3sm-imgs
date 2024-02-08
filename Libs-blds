@@ -10,8 +10,8 @@ echo "PNETCDF_VERSION: $PNETCDF_VERSION"
 echo "-----------------------------------------------"
 
 apt-get update
+apt-get -y upgrade
 apt-get -y install software-properties-common
-apt-get -y remove cmake
 add-apt-repository universe
 apt-get update && apt-get -y install \
     locales csh m4 libcurl4-openssl-dev \
@@ -19,6 +19,7 @@ apt-get update && apt-get -y install \
     git wget subversion libxml2-utils libxml-libxml-perl \
     libswitch-perl build-essential checkinstall zlib1g-dev libssl-dev python3-distutils \
     cmake mpich
+apt-get -y autoremove
 
 mkdir -p /usr/local/packages
 mkdir -p /usr/local/sources
@@ -189,7 +190,6 @@ export LIBS='-lnetcdf -lhdf5_hl -lhdf5 -ldl -lsz -lm -lz'
 ./configure --prefix=/usr/local/packages/netcdf-parallel  --disable-dap --enable-netcdf-4 --disable-shared --enable-static --with-hdf5=/usr/local/packages/hdf5-parallel --with-szlib=/usr/local/packages/szip --enable-valgrind-tests --enable-parallel-tests --enable-extra-tests --enable-extra-example-tests
 make && make install
 cd ..
-
 
 # build pnetcdf
 tar xzf pnetcdf-${PNETCDF_VERSION}.tar.gz
