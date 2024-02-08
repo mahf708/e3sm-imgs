@@ -74,8 +74,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            CMAKE_VERSION=${{ env.CMAKE_VERSION }}
-            MPICH_VERSION=${{ env.MPICH_VERSION }}
             SZIP_VERSION=${{ env.SZIP_VERSION }}
             HDF5_VERSION=${{ env.HDF5_VERSION }}
             NETCDFC_VERSION=${{ env.NETCDFC_VERSION }}
@@ -83,8 +81,6 @@ jobs:
             NETCDFFORTRAN_VERSION=${{ env.NETCDFFORTRAN_VERSION }}
             PNETCDF_VERSION=${{ env.PNETCDF_VERSION }}
         env:
-          CMAKE_VERSION: "3.27.7"
-          MPICH_VERSION: "3.3.2"
           SZIP_VERSION: "2.1.1"
           HDF5_VERSION: "1.10.6"
           NETCDFC_VERSION: "4.7.3"
