@@ -3,6 +3,7 @@
 export COM="WCYCL1850"
 export RES="ne4_oQU240"
 export MAC="singularity"
+export USER=test
 
 cd /app/e3sm/cime/scripts
 
