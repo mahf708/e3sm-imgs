@@ -8,6 +8,14 @@ on:
     tags:
       - 'v*'
 
+env:
+  SZIP_VERSION: "2.1.1"
+  HDF5_VERSION: "1.10.6"
+  NETCDFC_VERSION: "4.7.3"
+  NETCDFCXX_VERSION: "4.3.1"
+  NETCDFFORTRAN_VERSION: "4.4.4"
+  PNETCDF_VERSION: "1.12.1"
+
 jobs:
   ocis:
     runs-on: ubuntu-latest
@@ -34,11 +42,32 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.repository }}
+      - 
+        name: QEMU
+        uses: docker/setup-qemu-action@v3
       -
         name: Buildx
         uses: docker/setup-buildx-action@v3
       -
         name: Build
+        uses: docker/build-push-action@v5
+        with:
+          file: Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository }}:test
+          build-args: |
+            SZIP_VERSION=${{ env.SZIP_VERSION }}
+            HDF5_VERSION=${{ env.HDF5_VERSION }}
+            NETCDFC_VERSION=${{ env.NETCDFC_VERSION }}
+            NETCDFCXX_VERSION=${{ env.NETCDFCXX_VERSION }}
+            NETCDFFORTRAN_VERSION=${{ env.NETCDFFORTRAN_VERSION }}
+            PNETCDF_VERSION=${{ env.PNETCDF_VERSION }}
+      -
+        name: Test
+        run: |
+          docker run ghcr.io/${{ github.repository }}:test ./e3sm-test
+      -
+        name: Push
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
@@ -52,10 +81,3 @@ jobs:
             NETCDFCXX_VERSION=${{ env.NETCDFCXX_VERSION }}
             NETCDFFORTRAN_VERSION=${{ env.NETCDFFORTRAN_VERSION }}
             PNETCDF_VERSION=${{ env.PNETCDF_VERSION }}
-        env:
-          SZIP_VERSION: "2.1.1"
-          HDF5_VERSION: "1.10.6"
-          NETCDFC_VERSION: "4.7.3"
-          NETCDFCXX_VERSION: "4.3.1"
-          NETCDFFORTRAN_VERSION: "4.4.4"
-          PNETCDF_VERSION: "1.12.1"

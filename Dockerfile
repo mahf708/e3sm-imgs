@@ -21,6 +21,11 @@ ENV NETCDFFORTRAN_VERSION ${NETCDFFORTRAN_VERSION}
 ENV PNETCDF_VERSION ${PNETCDF_VERSION}
 
 COPY Libs-blds libs-blds
-RUN chmod +x libs-blds && ./libs-blds
+RUN chmod +x libs-blds && ./libs-blds && rm libs-blds
 
-USER E3SM_USER
+COPY E3sm-test e3sm-test
+RUN chmod +x e3sm-test
+
+ARG DOCKER_USER=e3sm_user
+RUN addgroup -S ${DOCKER_USER} && adduser -S ${DOCKER_USER} -G ${DOCKER_USER}
+USER ${DOCKER_USER}
