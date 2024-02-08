@@ -4,14 +4,7 @@ export COM="WCYCL1850"
 export RES="ne4_oQU240"
 export MAC="singularity"
 
-git clone https://github.com/E3SM-Project/E3SM.git
-
-cd E3SM
-
-sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-git submodule update --init --recursive
-
-cd cime/scripts
+cd /app/e3sm/cime/scripts
 
 mkdir -p $HOME/projects/e3sm/cesm-inputdata
 ./create_newcase --case "${COM}.${RES}.${MAC}" --compset ${COM} --res ${RES} --machine ${MAC}

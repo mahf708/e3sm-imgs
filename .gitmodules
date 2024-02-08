@@ -1,0 +1,3 @@
+[submodule "e3sm"]
+	path = e3sm
+	url = git@github.com:mahf708/E3SM
