@@ -1,0 +1,14 @@
+#!/bin/bash -fe
+
+export COM="WCYCL1850"
+export RES="ne4_oQU240"
+export MAC="singularity"
+export USER=test
+
+cd /app/work/e3sm/cime/scripts
+
+mkdir -p $HOME/projects/e3sm/cesm-inputdata
+./create_newcase --case "${COM}.${RES}.${MAC}" --compset ${COM} --res ${RES} --machine ${MAC}
+cd "${COM}.${RES}.${MAC}"
+./case.setup
+./case.build -v

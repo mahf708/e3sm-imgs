@@ -21,6 +21,7 @@ ENV NETCDFFORTRAN_VERSION ${NETCDFFORTRAN_VERSION}
 ENV PNETCDF_VERSION ${PNETCDF_VERSION}
 
 COPY Libs-blds libs-blds
-RUN chmod +x libs-blds && ./libs-blds
+RUN chmod +x libs-blds && ./libs-blds && rm libs-blds
 
-USER E3SM_USER
+COPY E3sm-test e3sm-test
+RUN chmod +x e3sm-test

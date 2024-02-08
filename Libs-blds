@@ -16,7 +16,7 @@ apt-get -y install software-properties-common
 add-apt-repository universe
 apt-get update && apt-get -y install \
     locales csh m4 libcurl4-openssl-dev \
-    libz-dev gcc g++ gfortran liblapack-dev make \
+    libz-dev gcc g++ gfortran liblapack-dev make git \
     git wget subversion libxml2-dev libxml2-utils libxml-libxml-perl \
     libswitch-perl build-essential checkinstall zlib1g-dev libssl-dev python3-distutils
 
