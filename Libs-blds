@@ -11,14 +11,22 @@ echo "-----------------------------------------------"
 
 apt-get update
 apt-get -y upgrade
+apt-get -y remove cmake
 apt-get -y install software-properties-common
 add-apt-repository universe
 apt-get update && apt-get -y install \
     locales csh m4 libcurl4-openssl-dev \
     libz-dev gcc g++ gfortran liblapack-dev make \
-    git wget subversion libxml2-utils libxml-libxml-perl \
-    libswitch-perl build-essential checkinstall zlib1g-dev libssl-dev python3-distutils \
-    cmake mpich
+    git wget subversion libxml2-dev libxml2-utils libxml-libxml-perl \
+    libswitch-perl build-essential checkinstall zlib1g-dev libssl-dev python3-distutils
+
+wget https://apt.kitware.com/kitware-archive.sh && \
+    chmod +x kitware-archive.sh && \
+    ./kitware-archive.sh && \
+    rm kitware-archive.sh
+
+apt-get -y install cmake mpich
+
 apt-get -y autoremove
 
 mkdir -p /usr/local/packages
@@ -27,7 +35,7 @@ mkdir -p $HOME/projects/e3sm/cesm-inputdata
 
 cd /usr/local/sources
 wget --inet4-only https://support.hdfgroup.org/ftp/lib-external/szip/${SZIP_VERSION}/src/szip-${SZIP_VERSION}.tar.gz
-wget --inet4-only https://hdf-wordpress-1.s3.amazonaws.com/wp-content/uploads/manual/HDF5/HDF5_${HDF5_VERSION//./_}/source/hdf5-${HDF5_VERSION}.tar.gz
+wget --inet4-only https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_VERSION::-2}/hdf5-${HDF5_VERSION}/src/hdf5-${HDF5_VERSION}.tar.gz
 wget --inet4-only https://github.com/Unidata/netcdf-c/archive/v${NETCDFC_VERSION}.tar.gz
 wget --inet4-only https://github.com/Unidata/netcdf-cxx4/archive/v${NETCDFCXX_VERSION}.tar.gz
 wget --inet4-only https://github.com/Unidata/netcdf-fortran/archive/v${NETCDFFORTRAN_VERSION}.tar.gz

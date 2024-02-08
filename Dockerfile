@@ -1,11 +1,10 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Los_Angeles
 
 ENV LANGUAGE=en_US:en \
-    LANG=en_US.UTF-8 \
-    LC_ALL=en_US.UTF-8
+    LANG=en_US.UTF-8
 
 ARG SZIP_VERSION
 ARG HDF5_VERSION
