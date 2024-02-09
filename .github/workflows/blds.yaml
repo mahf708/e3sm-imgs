@@ -70,7 +70,7 @@ jobs:
       -
         name: Test
         run: |
-          docker run -v "${PWD}":/app/work ghcr.io/${{ github.repository }}:test ./e3sm-test
+          docker run -v "${PWD}"/e3sm:/app/e3sm ghcr.io/${{ github.repository }}:test ./e3sm-test
       -
         name: Push
         uses: docker/build-push-action@v5
