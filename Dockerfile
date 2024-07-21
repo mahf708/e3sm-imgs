@@ -9,7 +9,7 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "    - compilers: [gcc@11]" \
 &&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
-&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml]" \
+&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml, py-stsci-distutils]" \
 &&   echo " " \
 &&   echo "  specs:" \
 &&   echo "    - szip" \
@@ -53,6 +53,9 @@ RUN cd /opt/spack-environment && \
 
 # Bare OS image to run the installed executables
 FROM spack/ubuntu-jammy:0.22.0
+
+RUN python -m python -m ensurepip --upgrade
+RUN python -m pip install --upgrade setuptools
 
 RUN mkdir -p $HOME/projects/e3sm/cesm-inputdata
 
