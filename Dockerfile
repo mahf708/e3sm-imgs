@@ -14,13 +14,13 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  specs:" \
 &&   echo "    - $compilers" \
 &&   echo "    - matrix:" \
-&&   echo "      - [$mpis]" \
+&&   echo "      - [\$mpis]" \
 &&   echo "      - [$%compilers]" \
 &&   echo "    - matrix:" \
-&&   echo "      - [$othpkgs]" \
+&&   echo "      - [\$othpkgs]" \
 &&   echo "      - [$%compilers]" \
 &&   echo "    - matrix:" \
-&&   echo "      - [$mpipkgs]" \
+&&   echo "      - [\$mpipkgs]" \
 &&   echo "      - [$^mpis]" \
 &&   echo "      - [$%compilers]" \
 &&   echo "  concretizer:" \
