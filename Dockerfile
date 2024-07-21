@@ -19,7 +19,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  - netcdf-fortran" \
 &&   echo "  - parallel-netcdf" \
 &&   echo "  - mpich" \
-&&   echo "  - gcc@11" \
+&&   echo "  - gcc" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
 &&   echo "  config:" \
@@ -28,7 +28,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "    mpi:" \
 &&   echo "      require: [mpich]" \
 &&   echo "    all:" \
-&&   echo "      compiler: [gcc@11]" \
+&&   echo "      compiler: [gcc]" \
 &&   echo "  view: /usr/local/packages") > /opt/spack-environment/spack.yaml
 
 # This command will add the build cache to your Spack configuration, allowing you to access pre-built packages for faster installation.
