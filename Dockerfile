@@ -19,6 +19,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  - netcdf-fortran" \
 &&   echo "  - parallel-netcdf" \
 &&   echo "  - mpich" \
+&&   echo "  - gcc@11" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
 &&   echo "  config:" \
@@ -26,11 +27,16 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  packages:" \
 &&   echo "    mpi:" \
 &&   echo "      require: [mpich]" \
+&&   echo "    all:" \
+&&   echo "      compiler: [gcc@11]" \
 &&   echo "  view: /usr/local/packages") > /opt/spack-environment/spack.yaml
 
 # This command will add the build cache to your Spack configuration, allowing you to access pre-built packages for faster installation.
 # https://cache.spack.io/tag/v0.22.1/?stack=e4s
 RUN spack mirror add v0.22.1-e4s https://binaries.spack.io/v0.22.1/e4s
+RUN spack buildcache keys --install --trust
+# https://cache.spack.io/tag/v0.22.1/?stack=root#
+RUN spack mirror add v0.22.1-root https://binaries.spack.io/v0.22.1/root
 RUN spack buildcache keys --install --trust
 
 # Install the software, remove unnecessary deps
