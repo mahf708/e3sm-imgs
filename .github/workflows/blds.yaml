@@ -9,11 +9,12 @@ on:
       - 'v*'
 
 env:
+  GCC_VERSION: "11.4.0"
   SZIP_VERSION: "2.1.1"
-  HDF5_VERSION: "1.10.6"
-  NETCDFC_VERSION: "4.7.3"
-  NETCDFCXX_VERSION: "4.3.1"
-  NETCDFFORTRAN_VERSION: "4.4.4"
+  HDF5_VERSION: "1.12.3"
+  NETCDFC_VERSION: "4.9.2"
+  NETCDFCXX_VERSION: "4.2"
+  NETCDFFORTRAN_VERSION: "4.6.1"
   PNETCDF_VERSION: "1.12.1"
 
 jobs:
@@ -61,6 +62,7 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository }}:test
           build-args: |
+            GCC_VERSION=${{ env.GCC_VERSION }}
             SZIP_VERSION=${{ env.SZIP_VERSION }}
             HDF5_VERSION=${{ env.HDF5_VERSION }}
             NETCDFC_VERSION=${{ env.NETCDFC_VERSION }}
@@ -70,7 +72,7 @@ jobs:
       -
         name: Test
         run: |
-          docker run -v "${PWD}":/app/work ghcr.io/${{ github.repository }}:test ./e3sm-test
+          docker run -v "${PWD}":/app/work -v "${HOME}":/root ghcr.io/${{ github.repository }}:test /app/test/e3sm-test
       -
         name: Push
         uses: docker/build-push-action@v6
@@ -81,9 +83,21 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
+            GCC_VERSION=${{ env.GCC_VERSION }}
             SZIP_VERSION=${{ env.SZIP_VERSION }}
             HDF5_VERSION=${{ env.HDF5_VERSION }}
             NETCDFC_VERSION=${{ env.NETCDFC_VERSION }}
             NETCDFCXX_VERSION=${{ env.NETCDFCXX_VERSION }}
             NETCDFFORTRAN_VERSION=${{ env.NETCDFFORTRAN_VERSION }}
             PNETCDF_VERSION=${{ env.PNETCDF_VERSION }}
+      - 
+        name: Artifacts
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: WCYCL1850.ne4_oQU240.singularity
+          path: |
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/TestStatus.log
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/bld/*.bldlog.*
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/run/*.log.*
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/run/*.cprnc.out

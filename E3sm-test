@@ -5,6 +5,9 @@ export RES="ne4_oQU240"
 export MAC="singularity"
 export USER=test
 
+# sometimes some annoying checks fail
+git config --global --add safe.directory '*'
+
 cd /app/work/e3sm/cime/scripts
 
 mkdir -p $HOME/projects/e3sm/cesm-inputdata
