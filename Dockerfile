@@ -6,7 +6,7 @@ FROM spack/ubuntu-noble:0.22.1 AS builder
 RUN mkdir -p /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  definitions:" \
-&&   echo "    - compilers: [gcc@12]" \
+&&   echo "    - compilers: [gcc@11]" \
 &&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
 &&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml]" \
