@@ -91,8 +91,9 @@ ENV LANGUAGE=en_US:en \
 # COPY Libs-blds libs-blds
 # RUN chmod +x libs-blds && ./libs-blds && rm libs-blds
 
-COPY E3sm-test e3sm-test
-RUN chmod +x e3sm-test
+RUN mkdir -p /app/test
+COPY E3sm-test /app/test/e3sm-test
+RUN chmod +x /app/test/e3sm-test
 
 # COPY --from=builder /opt/spack-environment /opt/spack-environment
 # COPY --from=builder /opt/software /opt/software
