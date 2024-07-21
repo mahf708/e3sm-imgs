@@ -27,7 +27,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "    mpi:" \
 &&   echo "      require: [mpich]" \
 &&   echo "    all:" \
-&&   echo "      compiler: [gcc]" \
+&&   echo "      compiler: [gcc@12.3.0]" \
 &&   echo "  view: /usr/local/packages") > /opt/spack-environment/spack.yaml
 
 # This command will add the build cache to your Spack configuration, allowing you to access pre-built packages for faster installation.
