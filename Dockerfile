@@ -9,7 +9,7 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "    - compilers: [gcc@11]" \
 &&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
-&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml, py-stsci-distutils]" \
+&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml, py-setuptools]" \
 &&   echo " " \
 &&   echo "  specs:" \
 &&   echo "    - szip" \
@@ -50,9 +50,6 @@ RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fa
 # Modifications to the environment that are necessary to run
 RUN cd /opt/spack-environment && \
     spack env activate --sh -d . >> /etc/profile.d/z10_spack_environment.sh
-
-RUN python -m python -m ensurepip --upgrade
-RUN python -m pip install --upgrade setuptools
 
 # Bare OS image to run the installed executables
 FROM spack/ubuntu-jammy:0.22.0
