@@ -18,6 +18,7 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "      - [\$%compilers]" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$othpkgs]" \
+&&   echo "      - [\$%compilers]" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$mpipkgs]" \
 &&   echo "      - [\$^mpis]" \
