@@ -1,5 +1,17 @@
 # Build stage with Spack pre-installed and ready to be used
-FROM spack/ubuntu-jammy:0.22.0 AS builder
+FROM spack/ubuntu-jammy:0.22.0
+
+apt-get update
+apt-get -y upgrade
+apt-get -y remove cmake
+apt-get -y install software-properties-common
+add-apt-repository universe
+apt-get update && apt-get -y install \
+    locales csh m4 libcurl4-openssl-dev \
+    libz-dev gcc g++ gfortran liblapack-dev make git \
+    git wget subversion libxml2-dev libxml2-utils libxml-libxml-perl \
+    libswitch-perl build-essential checkinstall zlib1g-dev libssl-dev python3-distutils
+
 
 # What we want to install and how we want to install it
 # is specified in a manifest file (spack.yaml)
@@ -51,8 +63,8 @@ RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fa
 RUN cd /opt/spack-environment && \
     spack env activate --sh -d . >> /etc/profile.d/z10_spack_environment.sh
 
-# Bare OS image to run the installed executables
-FROM spack/ubuntu-jammy:0.22.0
+# # Bare OS image to run the installed executables
+# FROM spack/ubuntu-jammy:0.22.0
 
 RUN mkdir -p $HOME/projects/e3sm/cesm-inputdata
 
@@ -82,9 +94,9 @@ ENV LANGUAGE=en_US:en \
 COPY E3sm-test e3sm-test
 RUN chmod +x e3sm-test
 
-COPY --from=builder /opt/spack-environment /opt/spack-environment
-COPY --from=builder /opt/software /opt/software
-COPY --from=builder /usr/local/packages /usr/local/packages
-COPY --from=builder /etc/profile.d/z10_spack_environment.sh /etc/profile.d/z10_spack_environment.sh
+# COPY --from=builder /opt/spack-environment /opt/spack-environment
+# COPY --from=builder /opt/software /opt/software
+# COPY --from=builder /usr/local/packages /usr/local/packages
+# COPY --from=builder /etc/profile.d/z10_spack_environment.sh /etc/profile.d/z10_spack_environment.sh
 
 ENTRYPOINT ["/bin/bash", "--rcfile", "/etc/profile", "-l"]
