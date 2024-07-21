@@ -19,7 +19,6 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  - netcdf-fortran" \
 &&   echo "  - parallel-netcdf" \
 &&   echo "  - mpich" \
-&&   echo "  - gcc" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
 &&   echo "  config:" \
@@ -54,7 +53,7 @@ RUN cd /opt/spack-environment && \
     spack env activate --sh -d . >> /etc/profile.d/z10_spack_environment.sh
 
 # Bare OS image to run the installed executables
-FROM ubuntu:24.04
+FROM spack/ubuntu-noble:latest
 
 RUN mkdir -p $HOME/projects/e3sm/cesm-inputdata
 
