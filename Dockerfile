@@ -16,14 +16,14 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "    - szip" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$mpis]" \
-&&   echo "      - [$%compilers]" \
+&&   echo "      - [\$%compilers]" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$othpkgs]" \
-&&   echo "      - [$%compilers]" \
+&&   echo "      - [\$%compilers]" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$mpipkgs]" \
-&&   echo "      - [$^mpis]" \
-&&   echo "      - [$%compilers]" \
+&&   echo "      - [\$^mpis]" \
+&&   echo "      - [\$%compilers]" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
 &&   echo "  config:" \
