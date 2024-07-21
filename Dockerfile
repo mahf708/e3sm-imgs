@@ -41,12 +41,12 @@ RUN spack buildcache keys --install --trust
 # Install the software, remove unnecessary deps
 RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fast && spack gc -y
 
-# Strip all the binaries
-RUN find -L /usr/local/packages/* -type f -exec readlink -f '{}' \; | \
-    xargs file -i | \
-    grep 'charset=binary' | \
-    grep 'x-executable\|x-archive\|x-sharedlib' | \
-    awk -F: '{print $1}' | xargs strip -s
+# # Strip all the binaries
+# RUN find -L /usr/local/packages/* -type f -exec readlink -f '{}' \; | \
+#     xargs file -i | \
+#     grep 'charset=binary' | \
+#     grep 'x-executable\|x-archive\|x-sharedlib' | \
+#     awk -F: '{print $1}' | xargs strip -s
 
 # Modifications to the environment that are necessary to run
 RUN cd /opt/spack-environment && \
