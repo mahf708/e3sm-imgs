@@ -34,7 +34,7 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "    - compilers: [gcc@${GCC_VERSION}]" \
 &&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5@${HDF5_VERSION}, netcdf-c@${NETCDFC_VERSION}, netcdf-cxx@${NETCDFCXX_VERSION}, netcdf-fortran@${NETCDFFORTRAN_VERSION}, parallel-netcdf@${PNETCDF_VERSION}]" \
-&&   echo "    - othpkgs: [cmake]" \
+&&   echo "    - othpkgs: [cmake, cprnc]" \
 &&   echo " " \
 &&   echo "  specs:" \
 &&   echo "    - szip" \
