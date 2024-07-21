@@ -11,7 +11,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  - cmake" \
 &&   echo "  - python" \
 &&   echo "  - libxml2" \
-&&   echo "  - perl-libxml-perl" \
+&&   echo "  - perl-xml-libxml" \
 &&   echo "  - szip" \
 &&   echo "  - hdf5" \
 &&   echo "  - netcdf-c" \
