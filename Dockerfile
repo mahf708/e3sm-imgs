@@ -34,7 +34,7 @@ RUN spack buildcache keys --install --trust
 RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fast && spack gc -y
 
 # Strip all the binaries
-RUN find -L /opt/view/* -type f -exec readlink -f '{}' \; | \
+RUN find -L /usr/local/packages/* -type f -exec readlink -f '{}' \; | \
     xargs file -i | \
     grep 'charset=binary' | \
     grep 'x-executable\|x-archive\|x-sharedlib' | \
