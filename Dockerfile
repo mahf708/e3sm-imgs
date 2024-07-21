@@ -6,7 +6,7 @@ FROM spack/ubuntu-noble:0.22.1 AS builder
 RUN mkdir -p /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  definitions:" \
-&&   echo "    - compilers: [gcc@12]" \
+&&   echo "    - compilers: [gcc]" \
 &&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
 &&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml]" \
@@ -25,7 +25,7 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "      - [\$^mpis]" \
 &&   echo "      - [\$%compilers]" \
 &&   echo "  concretizer:" \
-&&   echo "    unify: when_possible" \
+&&   echo "    unify: true" \
 &&   echo "  config:" \
 &&   echo "    install_tree: /opt/software" \
 &&   echo "  view: /usr/local/packages") > /opt/spack-environment/spack.yaml
@@ -53,7 +53,7 @@ RUN cd /opt/spack-environment && \
     spack env activate --sh -d . >> /etc/profile.d/z10_spack_environment.sh
 
 # Bare OS image to run the installed executables
-FROM spack/ubuntu-noble:0.22.1
+FROM ubuntu:24:04
 
 RUN mkdir -p $HOME/projects/e3sm/cesm-inputdata
 
