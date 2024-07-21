@@ -6,22 +6,23 @@ FROM spack/ubuntu-noble:latest AS builder
 RUN mkdir /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  definitions:" \
-&&   echo "  - compilers: [gcc@12.3.0]" \
-&&   echo "  - mpis: [mpich@4.2.1]" \
-&&   echo "  - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
-&&   echo "  - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml, szip]" \
+&&   echo "    - compilers: [gcc@12.3.0]" \
+&&   echo "    - mpis: [mpich@4.2.1]" \
+&&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
+&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml, szip]" \
+&&   echo " " \
 &&   echo "  specs:" \
-&&   echo "  - $compilers" \
-&&   echo "  - matrix:" \
-&&   echo "    - [$mpis]" \
-&&   echo "    - [$%compilers]" \
-&&   echo "  - matrix:" \
-&&   echo "    - [$othpkgs]" \
-&&   echo "    - [$%compilers]" \
-&&   echo "  - matrix:" \
-&&   echo "    - [$mpipkgs]" \
-&&   echo "    - [$^mpis]" \
-&&   echo "    - [$%compilers]" \
+&&   echo "    - $compilers" \
+&&   echo "    - matrix:" \
+&&   echo "      - [$mpis]" \
+&&   echo "      - [$%compilers]" \
+&&   echo "    - matrix:" \
+&&   echo "      - [$othpkgs]" \
+&&   echo "      - [$%compilers]" \
+&&   echo "    - matrix:" \
+&&   echo "      - [$mpipkgs]" \
+&&   echo "      - [$^mpis]" \
+&&   echo "      - [$%compilers]" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
 &&   echo "  config:" \
