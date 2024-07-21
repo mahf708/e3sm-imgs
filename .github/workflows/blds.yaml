@@ -70,7 +70,7 @@ jobs:
       -
         name: Test
         run: |
-          docker run -v "${PWD}":/app/work ghcr.io/${{ github.repository }}:test ./e3sm-test
+          docker run -v "${PWD}":/app/work "${HOME}":/root ghcr.io/${{ github.repository }}:test ./e3sm-test
       -
         name: Push
         uses: docker/build-push-action@v6
@@ -87,3 +87,14 @@ jobs:
             NETCDFCXX_VERSION=${{ env.NETCDFCXX_VERSION }}
             NETCDFFORTRAN_VERSION=${{ env.NETCDFFORTRAN_VERSION }}
             PNETCDF_VERSION=${{ env.PNETCDF_VERSION }}
+      - 
+        name: Artifacts
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: WCYCL1850.ne4_oQU240.singularity
+          path: |
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/TestStatus.log
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/bld/*.bldlog.*
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/run/*.log.*
+            ~/projects/e3sm/scratch/WCYCL1850.ne4_oQU240.singularity*/run/*.cprnc.out
