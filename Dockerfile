@@ -12,7 +12,7 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml]" \
 &&   echo " " \
 &&   echo "  specs:" \
-&&   echo "    - $compilers" \
+&&   echo "    - \$compilers" \
 &&   echo "    - szip" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$mpis]" \
