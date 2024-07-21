@@ -1,25 +1,23 @@
 # Build stage with Spack pre-installed and ready to be used
-FROM spack/ubuntu-noble:0.22.1 AS builder
+FROM spack/ubuntu-jammy:0.22.0 AS builder
 
 # What we want to install and how we want to install it
 # is specified in a manifest file (spack.yaml)
 RUN mkdir -p /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  definitions:" \
-&&   echo "    - compilers: [gcc]" \
+&&   echo "    - compilers: [gcc@11]" \
 &&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
 &&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml]" \
 &&   echo " " \
 &&   echo "  specs:" \
-&&   echo "    - \$compilers" \
 &&   echo "    - szip" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$mpis]" \
 &&   echo "      - [\$%compilers]" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$othpkgs]" \
-&&   echo "      - [\$%compilers]" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$mpipkgs]" \
 &&   echo "      - [\$^mpis]" \
@@ -53,7 +51,7 @@ RUN cd /opt/spack-environment && \
     spack env activate --sh -d . >> /etc/profile.d/z10_spack_environment.sh
 
 # Bare OS image to run the installed executables
-FROM ubuntu:24.04
+FROM spack/ubuntu-jammy:0.22.0
 
 RUN mkdir -p $HOME/projects/e3sm/cesm-inputdata
 
