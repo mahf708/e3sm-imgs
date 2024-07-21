@@ -9,6 +9,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  - git" \
 &&   echo "  - perl" \
 &&   echo "  - cmake" \
+&&   echo "  - python" \
 &&   echo "  - szip" \
 &&   echo "  - hdf5" \
 &&   echo "  - netcdf-c" \
