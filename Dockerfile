@@ -1,12 +1,12 @@
 # Build stage with Spack pre-installed and ready to be used
 FROM spack/ubuntu-jammy:0.22.0
 
-apt-get update
-apt-get -y upgrade
-apt-get -y remove cmake
-apt-get -y install software-properties-common
-add-apt-repository universe
-apt-get update && apt-get -y install \
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y remove cmake
+RUN apt-get -y install software-properties-common
+RUN add-apt-repository universe
+RUN apt-get update && apt-get -y install \
     locales csh m4 libcurl4-openssl-dev \
     libz-dev gcc g++ gfortran liblapack-dev make git \
     git wget subversion libxml2-dev libxml2-utils libxml-libxml-perl \
