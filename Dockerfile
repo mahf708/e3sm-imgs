@@ -6,6 +6,10 @@ FROM spack/ubuntu-noble:latest as builder
 RUN mkdir /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  specs:" \
+&&   echo "  - git" \
+&&   echo "  - perl" \
+&&   echo "  - cmake" \
+&&   echo "  - gcc" \
 &&   echo "  - szip" \
 &&   echo "  - hdf5" \
 &&   echo "  - netcdf-c" \
@@ -20,7 +24,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  packages:" \
 &&   echo "    mpi:" \
 &&   echo "      require: [mpich]" \
-&&   echo "  view: /opt/view") > /opt/spack-environment/spack.yaml
+&&   echo "  view: /usr/local/packages") > /opt/spack-environment/spack.yaml
 
 # This command will add the build cache to your Spack configuration, allowing you to access pre-built packages for faster installation.
 # https://cache.spack.io/tag/v0.22.1/?stack=e4s
@@ -44,11 +48,13 @@ RUN cd /opt/spack-environment && \
 # Bare OS image to run the installed executables
 FROM ubuntu:24.04
 
-# ARG DEBIAN_FRONTEND=noninteractive
-# ENV TZ=America/Los_Angeles
+RUN mkdir -p $HOME/projects/e3sm/cesm-inputdata
 
-# ENV LANGUAGE=en_US:en \
-#     LANG=en_US.UTF-8
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/Los_Angeles
+
+ENV LANGUAGE=en_US:en \
+    LANG=en_US.UTF-8
 
 # ARG SZIP_VERSION
 # ARG HDF5_VERSION
@@ -67,12 +73,12 @@ FROM ubuntu:24.04
 # COPY Libs-blds libs-blds
 # RUN chmod +x libs-blds && ./libs-blds && rm libs-blds
 
-# COPY E3sm-test e3sm-test
-# RUN chmod +x e3sm-test
+COPY E3sm-test e3sm-test
+RUN chmod +x e3sm-test
 
 COPY --from=builder /opt/spack-environment /opt/spack-environment
 COPY --from=builder /opt/software /opt/software
-COPY --from=builder /opt/view /opt/view
+COPY --from=builder /usr/local/packages /usr/local/packages
 COPY --from=builder /etc/profile.d/z10_spack_environment.sh /etc/profile.d/z10_spack_environment.sh
 
 ENTRYPOINT ["/bin/bash", "--rcfile", "/etc/profile", "-l"]
