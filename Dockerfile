@@ -1,18 +1,19 @@
 # Build stage with Spack pre-installed and ready to be used
-FROM spack/ubuntu-noble:latest AS builder
+FROM spack/ubuntu-noble:v0.22.1 AS builder
 
 # What we want to install and how we want to install it
 # is specified in a manifest file (spack.yaml)
-RUN mkdir /opt/spack-environment \
+RUN mkdir -p /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  definitions:" \
-&&   echo "    - compilers: [gcc@12.3.0]" \
-&&   echo "    - mpis: [mpich@4.2.1]" \
+&&   echo "    - compilers: [gcc@13]" \
+&&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
-&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml, szip]" \
+&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml]" \
 &&   echo " " \
 &&   echo "  specs:" \
 &&   echo "    - $compilers" \
+&&   echo "    - szip" \
 &&   echo "    - matrix:" \
 &&   echo "      - [\$mpis]" \
 &&   echo "      - [$%compilers]" \
