@@ -40,7 +40,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  - netcdf-c" \
 &&   echo "  - netcdf-cxx" \
 &&   echo "  - netcdf-fortran" \
-&&   echo "  - pnetcdf" \
+&&   echo "  - parallel-netcdf" \
 &&   echo "  - mpich" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
