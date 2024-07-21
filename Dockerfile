@@ -9,7 +9,7 @@ RUN mkdir -p /opt/spack-environment \
 &&   echo "    - compilers: [gcc@11]" \
 &&   echo "    - mpis: [mpich]" \
 &&   echo "    - mpipkgs: [hdf5, netcdf-c, netcdf-cxx, netcdf-fortran, parallel-netcdf]" \
-&&   echo "    - othpkgs: [cmake, perl, python, libxml2, perl-xml-libxml, py-setuptools]" \
+&&   echo "    - othpkgs: [cmake, netlib-lapack, openblas, perl, python, libxml2, perl-xml-libxml, py-setuptools]" \
 &&   echo " " \
 &&   echo "  specs:" \
 &&   echo "    - szip" \
