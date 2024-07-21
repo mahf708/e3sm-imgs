@@ -1,5 +1,5 @@
 # Build stage with Spack pre-installed and ready to be used
-FROM spack/ubuntu-noble:latest as builder
+FROM spack/ubuntu-noble:latest AS builder
 
 # What we want to install and how we want to install it
 # is specified in a manifest file (spack.yaml)
@@ -10,6 +10,8 @@ RUN mkdir /opt/spack-environment \
 &&   echo "  - perl" \
 &&   echo "  - cmake" \
 &&   echo "  - python" \
+&&   echo "  - libxml2" \
+&&   echo "  - perl-libxml-perl" \
 &&   echo "  - szip" \
 &&   echo "  - hdf5" \
 &&   echo "  - netcdf-c" \
