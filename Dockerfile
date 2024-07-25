@@ -1,6 +1,7 @@
 FROM spack/ubuntu-jammy:0.22.0
 
 ARG GCC_VERSION
+ARG MPICH_VERSION
 ARG SZIP_VERSION
 ARG HDF5_VERSION
 ARG NETCDFC_VERSION
@@ -9,6 +10,7 @@ ARG NETCDFFORTRAN_VERSION
 ARG PNETCDF_VERSION
 
 ENV GCC_VERSION=${GCC_VERSION}
+ENV MPICH_VERSION=${MPICH_VERSION}
 ENV SZIP_VERSION=${SZIP_VERSION}
 ENV HDF5_VERSION=${HDF5_VERSION}
 ENV NETCDFC_VERSION=${NETCDFC_VERSION}
@@ -32,7 +34,7 @@ RUN mkdir -p /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  definitions:" \
 &&   echo "    - compilers: [gcc@${GCC_VERSION}]" \
-&&   echo "    - mpis: [mpich]" \
+&&   echo "    - mpis: [mpich@${MPICH_VERSION}]" \
 &&   echo "    - mpipkgs: [hdf5@${HDF5_VERSION}, netcdf-c@${NETCDFC_VERSION}, netcdf-cxx@${NETCDFCXX_VERSION}, netcdf-fortran@${NETCDFFORTRAN_VERSION}, parallel-netcdf@${PNETCDF_VERSION}]" \
 &&   echo "    - othpkgs: [cmake, cprnc]" \
 &&   echo " " \
@@ -62,7 +64,7 @@ RUN spack buildcache keys --install --trust
 RUN spack mirror add v0.22.0-root https://binaries.spack.io/v0.22.0/root
 RUN spack buildcache keys --install --trust
 # https://oaciss.uoregon.edu/e4s/inventory.html
-RUN spack mirror add E4S https://cache.e4s.io/24.05
+RUN spack mirror add E4S https://cache.e4s.io
 RUN spack buildcache keys -it
 
 RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fast && spack gc -y

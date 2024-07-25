@@ -10,6 +10,7 @@ on:
 
 env:
   GCC_VERSION: "11.4.0"
+  MPICH_VERSION: "3.4"
   SZIP_VERSION: "2.1.1"
   HDF5_VERSION: "1.12.3"
   NETCDFC_VERSION: "4.9.2"
@@ -63,6 +64,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:test
           build-args: |
             GCC_VERSION=${{ env.GCC_VERSION }}
+            MPICH_VERSION=${{ env.MPICH_VERSION }}
             SZIP_VERSION=${{ env.SZIP_VERSION }}
             HDF5_VERSION=${{ env.HDF5_VERSION }}
             NETCDFC_VERSION=${{ env.NETCDFC_VERSION }}
@@ -84,6 +86,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             GCC_VERSION=${{ env.GCC_VERSION }}
+            MPICH_VERSION=${{ env.MPICH_VERSION }}
             SZIP_VERSION=${{ env.SZIP_VERSION }}
             HDF5_VERSION=${{ env.HDF5_VERSION }}
             NETCDFC_VERSION=${{ env.NETCDFC_VERSION }}
