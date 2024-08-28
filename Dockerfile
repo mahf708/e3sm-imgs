@@ -64,7 +64,7 @@ RUN spack buildcache keys --install --trust
 RUN spack mirror add v0.22.0-root https://binaries.spack.io/v0.22.0/root
 RUN spack buildcache keys --install --trust
 # https://oaciss.uoregon.edu/e4s/inventory.html
-RUN spack mirror add E4S https://cache.e4s.io/24.05
+RUN spack mirror add E4S https://cache.e4s.io
 RUN spack buildcache keys -it
 
 RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fast && spack gc -y
