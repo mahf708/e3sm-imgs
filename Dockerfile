@@ -1,4 +1,4 @@
-FROM spack/ubuntu-jammy:0.22.0
+FROM spack/ubuntu-jammy:0.22.1
 
 ARG GCC_VERSION
 ARG MPICH_VERSION
